@@ -1,11 +1,14 @@
 import React from 'react'
 import config from '@Config'
 import { Button, Text, View } from 'react-native'
+import t from '@Localize'
 
 export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    ...config.defaultNavigation,
-    title: 'Settings',
+  static navigationOptions = _ => {
+    return {
+      ...config.defaultNavigation,
+      title: t('settings'),
+    }
   }
 
   render() {
