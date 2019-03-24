@@ -14,7 +14,7 @@ export default class Icon extends React.Component {
 
 Icon.defaultProps = {
   size: 26,
-  color: '#ffffff'
+  color: '#000'
 }
 Icon.propTypes = {
   name: PropTypes.string.isRequired

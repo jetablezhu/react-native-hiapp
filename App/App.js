@@ -32,11 +32,11 @@ const AppContainer = createAppContainer(createBottomTabNavigator(
         const { routeName } = navigation.state
         switch (routeName) {
           case 'Home':
-            return <Text style={{ color: tintColor, fontSize: 12 }}>{t('home')}</Text>
+            return <Text style={{ color: tintColor, fontSize: 12 }}>{t('global.home')}</Text>
           case 'Message':
-            return <Text style={{ color: tintColor, fontSize: 12 }}>{t('message')}</Text>
+            return <Text style={{ color: tintColor, fontSize: 12 }}>{t('global.message')}</Text>
           case 'Settings':
-            return <Text style={{ color: tintColor, fontSize: 12 }}>{t('settings')}</Text>
+            return <Text style={{ color: tintColor, fontSize: 12 }}>{t('global.settings')}</Text>
         }
       },
       tabBarIcon: ({ focused, tintColor }) => {

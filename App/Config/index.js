@@ -1,5 +1,6 @@
 const Skin = {
-  mainColor: '#ff9800'
+  mainColor: '#ff9800',
+  viewsBackgroundColor: '#eef0f3'
 }
 
 const App = {

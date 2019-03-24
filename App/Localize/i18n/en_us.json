@@ -1,5 +1,13 @@
 {
-  "home": "Home",
-  "message": "Message",
-  "settings": "Settings"
+  "global": {
+    "home": "Home",
+    "message": "Message",
+    "settings": "Settings"
+  },
+  "settings": {
+    "location": "Location",
+    "language": "Language",
+    "feedback": "Feedback",
+    "about": "About"
+  }
 }

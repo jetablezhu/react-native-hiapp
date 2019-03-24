@@ -7,14 +7,14 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = _ => {
     return {
       ...config.defaultNavigation,
-      title: t('home')
+      title: t('global.home')
     }
   }
 
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>{t('home')}</Text>
+        <Text>{t('global.home')}</Text>
         <Button
           title="Go to Message"
           onPress={() => this.props.navigation.navigate('Message')}
