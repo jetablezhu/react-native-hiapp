@@ -1,7 +1,15 @@
 import React from 'react'
+import connect from 'redux-connect-decorator'
 import config from '@Config'
-import { Button, Text, View } from 'react-native'
 import t from '@Localize'
+import { Button, Text, View } from 'react-native'
+import { fetchUserInfo } from '@Store/Actions'
+
+@connect(state => ({
+  //
+}), {
+  fetchUserInfo
+})
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = _ => {
@@ -9,6 +17,10 @@ export default class HomeScreen extends React.Component {
       ...config.defaultNavigation,
       title: t('global.home')
     }
+  }
+
+  componentDidMount() {
+    this.props.fetchUserInfo()
   }
 
   render() {

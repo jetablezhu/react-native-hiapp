@@ -1,9 +1,11 @@
 import React from 'react'
-import * as RNLocalize from 'react-native-localize'
 import Config from '@Config'
+import configStore from '@Store'
+import { Provider } from 'react-redux'
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
 import t, { setI18nConfig } from '@Localize'
 import { Text } from 'react-native'
+import * as RNLocalize from 'react-native-localize'
 
 import Icon from '@Components/Icon'
 import HomeScreen from '@Views/Home'
@@ -63,6 +65,8 @@ const AppContainer = createAppContainer(createBottomTabNavigator(
   }
 ))
 
+const store = configStore()
+
 export default class App extends React.Component {
   constructor(props) {
     super(props)
@@ -82,6 +86,10 @@ export default class App extends React.Component {
     this.forceUpdate()
   }
   render() {
-    return <AppContainer />
+    return (
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    )
   }
 }

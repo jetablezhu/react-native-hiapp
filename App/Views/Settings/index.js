@@ -1,4 +1,5 @@
 import React from 'react'
+import connect from 'redux-connect-decorator'
 import t from '@Localize'
 import config from '@Config'
 import styles from '@Styles'
@@ -6,6 +7,10 @@ import Icon from '@Components/Icon'
 import { View, StyleSheet } from 'react-native'
 import { ListItem } from 'react-native-elements'
 import req from '@Network'
+
+@connect(state => ({
+  user: state.app.user
+}))
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = _ => {
@@ -34,16 +39,6 @@ export default class HomeScreen extends React.Component {
         color: '#fc3'
       }
     ]
-    this.state = {
-      profile: {
-        nick_name: '',
-        location: ''
-      }
-    }
-  }
-
-  componentDidMount() {
-    this.getUserInfo()
   }
 
   render() {
@@ -54,12 +49,12 @@ export default class HomeScreen extends React.Component {
           leftAvatar={{
             size: 65,
             source: {
-              uri: this.state.profile.avatar_url
+              uri: this.props.user.avatar_url
             }
           }}
-          title={this.state.profile.nick_name}
+          title={this.props.user.nick_name}
           titleStyle={{ fontSize: 23 }}
-          subtitle={t('settings.location') + ': ' + this.state.profile.location}
+          subtitle={t('settings.location') + ': ' + this.props.user.location}
           subtitleStyle={{ fontSize: 16, color: '#858585' }}
           onPress={_ => {}}
         />
@@ -76,15 +71,6 @@ export default class HomeScreen extends React.Component {
         }
       </View>
     )
-  }
-
-  getUserInfo() {
-    req.get('/user_login.json').then(res => {
-      const data = res.data
-      this.setState({
-        profile: data.user
-      })
-    })
   }
 }
 
