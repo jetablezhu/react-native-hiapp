@@ -35,7 +35,10 @@ export default class HomeScreen extends React.Component {
       }
     ]
     this.state = {
-      profile: {}
+      profile: {
+        nick_name: '',
+        location: ''
+      }
     }
   }
 
