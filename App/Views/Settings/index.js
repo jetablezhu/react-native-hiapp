@@ -26,17 +26,26 @@ export default class HomeScreen extends React.Component {
       {
         title: t('settings.language'),
         icon: 'language',
-        color: '#09f'
+        color: '#09f',
+        onPress() {
+          this.props.navigation.navigate('Language')
+        }
       },
       {
         title: t('settings.feedback'),
         icon: 'feedback2',
-        color: '#0c9'
+        color: '#0c9',
+        onPress() {
+          this.props.navigation.navigate('Feedback')
+        }
       },
       {
         title: t('settings.about'),
         icon: 'about1',
-        color: '#fc3'
+        color: '#fc3',
+        onPress() {
+          this.props.navigation.navigate('About')
+        }
       }
     ]
   }
@@ -46,6 +55,8 @@ export default class HomeScreen extends React.Component {
       <View style={viewStyles.container}>
         <ListItem
           chevron
+          topDivider
+          bottomDivider
           leftAvatar={{
             size: 65,
             source: {
@@ -60,13 +71,17 @@ export default class HomeScreen extends React.Component {
         />
         {
           this.menuList.map((item, i) => (
-            <ListItem
-              containerStyle={viewStyles.listItem}
-              chevron
-              key={i}
-              title={item.title}
-              leftIcon={<Icon style={{ marginTop: 4 }} name={item.icon} color={item.color}/>}
-            />
+            <View style={viewStyles.list} key={i}>
+              <ListItem
+                containerStyle={viewStyles.listItem}
+                chevron
+                topDivider
+                bottomDivider
+                title={item.title}
+                onPress={item.onPress.bind(this)}
+                leftIcon={<Icon style={{ marginTop: 4 }} name={item.icon} color={item.color}/>}
+              />
+            </View>
           ))
         }
       </View>
@@ -79,7 +94,11 @@ const viewStyles = StyleSheet.create({
     ...styles.container,
     paddingTop: 20
   },
+  list: {
+    marginTop: 15
+  },
   listItem: {
-    marginTop: 15,
+    paddingTop: 10,
+    paddingBottom: 10
   }
 })
