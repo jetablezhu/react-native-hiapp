@@ -14,6 +14,21 @@ const translationGetters = {
 }
 
 export async function setI18nConfig() {
+  const { languageTag, isRTL } = await getCurrentLanguage()
+  translate.cache.clear()
+  I18nManager.forceRTL(isRTL)
+
+  i18n.translations = { [languageTag]: translationGetters[languageTag]() }
+  i18n.locale = languageTag
+}
+
+export async function setCurrentLanguage(languageTag) {
+  storage.save('languageTag', languageTag).then(_ => {
+    i18n.locale = languageTag
+  })
+}
+
+export async function getCurrentLanguage() {
   const fallback = { languageTag: 'en', isRTL: false }
 
   const languageConfig = RNLocalize.findBestAvailableLanguage(Object.keys(translationGetters)) || fallback
@@ -21,11 +36,7 @@ export async function setI18nConfig() {
   const { isRTL } = languageConfig
   const localLang = await storage.get('languageTag')
   languageTag = localLang || languageTag
-  translate.cache.clear()
-  I18nManager.forceRTL(isRTL)
-
-  i18n.translations = { [languageTag]: translationGetters[languageTag]() }
-  i18n.locale = languageTag
+  return { languageTag, isRTL }
 }
 
 const translate = memoize(
