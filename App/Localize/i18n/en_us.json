@@ -3,12 +3,18 @@
     "home": "Home",
     "message": "Message",
     "settings": "Settings",
-    "about": "About"
+    "about": "About",
+    "profile": "Profile"
   },
   "settings": {
     "location": "Location",
     "language": "Language",
     "feedback": "Feedback",
-    "about": "About"
+    "about": "About",
+    "avatar": "Avatar",
+    "nickname": "Nickname",
+    "gender": "Gender",
+    "male": "male",
+    "female": "female"
   }
 }

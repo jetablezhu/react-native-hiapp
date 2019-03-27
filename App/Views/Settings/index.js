@@ -67,7 +67,7 @@ export default class HomeScreen extends React.Component {
           titleStyle={{ fontSize: 23 }}
           subtitle={t('settings.location') + ': ' + this.props.user.location}
           subtitleStyle={{ fontSize: 16, color: '#858585' }}
-          onPress={_ => {}}
+          onPress={_ => { this.props.navigation.navigate('Profile') }}
         />
         {
           this.menuList.map((item, i) => (
