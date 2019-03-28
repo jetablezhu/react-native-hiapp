@@ -7,7 +7,8 @@ import ListTitle from '@Components/ListTitle'
 
 import {
   View,
-  StyleSheet
+  StyleSheet,
+  Alert
 } from 'react-native'
 
 import {
@@ -76,6 +77,7 @@ export default class LanguageScreen extends React.Component {
       lang
     })
     setCurrentLanguage(lang)
+    Alert.alert(t('settings.needRestartTip'))
   }
 }
 

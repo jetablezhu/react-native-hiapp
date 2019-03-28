@@ -15,6 +15,7 @@
     "nickname": "Nickname",
     "gender": "Gender",
     "male": "male",
-    "female": "female"
+    "female": "female",
+    "needRestartTip": "The language setting will take effect after app is restarted"
   }
 }
