@@ -4,7 +4,9 @@
     "message": "Message",
     "settings": "Settings",
     "about": "About",
-    "profile": "Profile"
+    "profile": "Profile",
+    "send": "Send",
+    "ok": "OK"
   },
   "settings": {
     "location": "Location",
@@ -16,6 +18,8 @@
     "gender": "Gender",
     "male": "male",
     "female": "female",
-    "needRestartTip": "The language setting will take effect after app is restarted"
+    "needRestartTip": "The language setting will take effect after app is restarted",
+    "feedbackPlaceholder": "Hi, any suggestion to tell us?",
+    "feedbackSuccess": "Thanks for your feedback"
   }
 }
