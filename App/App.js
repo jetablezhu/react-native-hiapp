@@ -9,7 +9,8 @@ import * as RNLocalize from 'react-native-localize'
 
 import {
   SafeAreaView,
-  StyleSheet
+  StyleSheet,
+  StatusBar
 } from 'react-native'
 
 import AppContainer from './Navigator'
@@ -50,6 +51,9 @@ export default class App extends React.Component {
     }
     return (
       <Provider store={store}>
+        <StatusBar
+          barStyle="light-content"
+        />
         <AppContainer />
         <Modals />
       </Provider>
