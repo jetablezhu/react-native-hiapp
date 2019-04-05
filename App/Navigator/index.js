@@ -6,7 +6,7 @@ import { createStackNavigator, createBottomTabNavigator, createAppContainer } fr
 
 import Icon from '@Components/Icon'
 import HomeScreen from '@Views/Home'
-import MessageScreen from '@Views/Message'
+import ContactsScreen from '@Views/Contacts'
 import SettingsScreen from '@Views/Settings'
 import AboutScreen from '@Views/About'
 import ProfileScreen from '@Views/Profile'
@@ -16,8 +16,8 @@ import FeedbackScreen from '@Views/Feedback'
 const HomeStack = createStackNavigator({
   Home: { screen: HomeScreen, }
 })
-const MessageStack = createStackNavigator({
-  Message: { screen: MessageScreen }
+const ContactsStack = createStackNavigator({
+  Contacts: { screen: ContactsScreen }
 })
 const SettingsStack = createStackNavigator({
   Settings: { screen: SettingsScreen },
@@ -26,7 +26,7 @@ const SettingsStack = createStackNavigator({
 const TabNavigator = createBottomTabNavigator(
   {
     Home: { screen: HomeStack },
-    Message: { screen: MessageStack },
+    Contacts: { screen: ContactsStack },
     Settings: { screen: SettingsStack }
   },
   {
@@ -39,8 +39,8 @@ const TabNavigator = createBottomTabNavigator(
         switch (routeName) {
           case 'Home':
             return <Text style={{ color: tintColor, fontSize: 12 }}>{t('global.home')}</Text>
-          case 'Message':
-            return <Text style={{ color: tintColor, fontSize: 12 }}>{t('global.message')}</Text>
+          case 'Contacts':
+            return <Text style={{ color: tintColor, fontSize: 12 }}>{t('global.contacts')}</Text>
           case 'Settings':
             return <Text style={{ color: tintColor, fontSize: 12 }}>{t('global.settings')}</Text>
         }
@@ -52,7 +52,7 @@ const TabNavigator = createBottomTabNavigator(
           case 'Home':
             iconName = `ios7home${focused ? '' : 'outline'}`
             break
-          case 'Message':
+          case 'Contacts':
             iconName = `ios7chatbubble${focused ? '' : 'outline'}`
             break
           case 'Settings':
