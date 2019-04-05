@@ -5,4 +5,11 @@ export default {
     flex: 1,
     backgroundColor: config.viewsBackgroundColor
   },
+  modalHeader: {
+    center: {
+      color: '#fff',
+      fontSize: 17,
+      fontWeight: '600'
+    }
+  }
 }

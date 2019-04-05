@@ -14,6 +14,7 @@ module.exports = {
           '@Styles': './App/Styles',
           '@Utils': './App/Utils',
           '@Views': './App/Views',
+          '@Modals': './App/Modals',
           '@Store': './App/Store',
           '@assets': './App/assets'
         }

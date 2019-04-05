@@ -1,21 +1,30 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Icon from '../Icon'
 
 import {
-  Text,
+  Button,
   StyleSheet,
   TouchableHighlight
 } from 'react-native'
 
 export default class HeaderButton extends React.Component {
   render() {
-    const { text, onPressButton, ...props } = this.props
-    return (
-      <TouchableHighlight underlayColor='transparent' style={styles.container} onPress={() => onPressButton() }>
-        <Text style={styles.text}>{text}</Text>
-      </TouchableHighlight>
-    )
+    const { isIcon, text, onPressButton, ...props } = this.props
+    if (isIcon) {
+      return (
+        <TouchableHighlight underlayColor='transparent' style={styles.iconContainer} onPress={() => onPressButton() }>
+          <Icon name={text} size={28} color="#fff"/>
+        </TouchableHighlight>
+      )
+    } else {
+      return <Button title={text} color="#fff" onPress={() => onPressButton() }/>
+    }
   }
+}
+
+HeaderButton.defaultProps = {
+  isIcon: false
 }
 
 HeaderButton.propTypes = {
@@ -24,14 +33,10 @@ HeaderButton.propTypes = {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: 76,
+  iconContainer: {
+    width: 50,
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  text: {
-    fontSize: 17,
-    color: '#fff'
   }
 })

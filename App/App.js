@@ -2,6 +2,7 @@ import React from 'react'
 import Config from '@Config'
 import configStore from '@Store'
 import styles from '@Styles'
+import Modals from '@Modals'
 import { Provider } from 'react-redux'
 import { setI18nConfig } from '@Localize'
 import * as RNLocalize from 'react-native-localize'
@@ -50,6 +51,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <AppContainer />
+        <Modals />
       </Provider>
     )
   }

@@ -7,7 +7,21 @@ export default handleActions({
       ...state,
       user: action.payload
     }
+  },
+  [types.SET_MODAL_VISIBLE_STATUS] (state, action) {
+    const { name, status } = action.payload
+    const { modalVisible } = state
+    modalVisible[name] = status
+    return {
+      ...state,
+      modalVisible: {
+        ...modalVisible
+      }
+    }
   }
 }, {
-  user: {}
+  user: {},
+  modalVisible: {
+    publisher: false
+  }
 })

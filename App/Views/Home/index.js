@@ -1,22 +1,41 @@
 import React from 'react'
 import connect from 'redux-connect-decorator'
 import config from '@Config'
+import styles from '@Styles'
 import t from '@Localize'
-import { Button, Text, View } from 'react-native'
-import { fetchUserInfo } from '@Store/Actions'
+import HeaderButton from '@Components/HeaderButton'
+import { fetchUserInfo, setModalVisibleStatus } from '@Store/Actions'
+
+import {
+  View,
+  StyleSheet
+} from 'react-native'
 
 @connect(state => ({
   //
 }), {
+  setModalVisibleStatus,
   fetchUserInfo
 })
 
 export default class HomeScreen extends React.Component {
-  static navigationOptions = _ => {
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state
+    const onPressRightButtonFunc = params.openPublisher || function() {}
     return {
       ...config.defaultNavigation,
-      title: t('global.home')
+      title: t('global.home'),
+      headerRight: (
+        <HeaderButton
+          isIcon
+          text='feedback'
+          onPressButton={ onPressRightButtonFunc }/>
+      )
     }
+  }
+
+  componentWillMount () {
+    this.props.navigation.setParams({ openPublisher: () => this.openPublisher() })
   }
 
   componentDidMount() {
@@ -25,17 +44,21 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>{t('global.home')}</Text>
-        <Button
-          title="Go to Message"
-          onPress={() => this.props.navigation.navigate('Message')}
-        />
-        <Button
-          title="Go to Settings"
-          onPress={() => this.props.navigation.navigate('Settings')}
-        />
+      <View style={viewStyles.container}>
       </View>
     )
   }
+
+  openPublisher() {
+    this.props.setModalVisibleStatus({
+      name: 'publisher',
+      status: true
+    })
+  }
 }
+
+const viewStyles = StyleSheet.create({
+  container: {
+    ...styles.container,
+  },
+})

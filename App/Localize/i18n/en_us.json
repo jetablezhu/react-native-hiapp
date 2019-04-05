@@ -6,7 +6,12 @@
     "about": "About",
     "profile": "Profile",
     "send": "Send",
-    "ok": "OK"
+    "ok": "OK",
+    "close": "Close"
+  },
+  "home": {
+    "publisher": "Publisher",
+    "publisherPlaceholder": "What's new with you."
   },
   "settings": {
     "location": "Location",
