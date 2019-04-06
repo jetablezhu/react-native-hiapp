@@ -55,6 +55,7 @@ export default class HomeScreen extends React.Component {
           leftAvatar={{ source: { uri: getRemoteAvatar(item.avatar) } }}
           title={item.nickname}
           subtitle={item.location}
+          onPress={_ => { this.props.navigation.navigate('Message', { user: item }) }}
         />
       </View>
     )

@@ -12,6 +12,7 @@ import AboutScreen from '@Views/About'
 import ProfileScreen from '@Views/Profile'
 import LanguageScreen from '@Views/Language'
 import FeedbackScreen from '@Views/Feedback'
+import MessageScreen from '@Views/Message'
 
 const HomeStack = createStackNavigator({
   Home: { screen: HomeScreen, }
@@ -74,7 +75,8 @@ const AppStack = createStackNavigator({
   About: { screen: AboutScreen },
   Profile: { screen: ProfileScreen },
   Language: { screen: LanguageScreen },
-  Feedback: { screen: FeedbackScreen }
+  Feedback: { screen: FeedbackScreen },
+  Message: { screen: MessageScreen }
 }, {
   defaultNavigationOptions: () => ({
     ...config.defaultNavigation
