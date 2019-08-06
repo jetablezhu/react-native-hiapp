@@ -1,12 +1,13 @@
 import req from '@Network'
 import types from '../Types'
 import { createAction } from 'redux-actions'
+import data from '../../data/contacts'
 
 export const initContacts = createAction(types.INIT_CONTACTS)
 
 export function fetchContacts() {
   return (dispatch) => {
-    return req.get('/contacts.json').then(res => {
+    return req.get('contacts.json').then(res => {
       const data = res.data
       const indexedHeader = {}
       data.forEach(item => {

@@ -7,7 +7,7 @@ export const setModalVisibleStatus = createAction(types.SET_MODAL_VISIBLE_STATUS
 
 export function fetchUserInfo() {
   return (dispatch) => {
-    req.get('/user_login.json').then(res => {
+    req.get('user_login.json').then(res => {
       const data = res.data
       dispatch(initUserInfo(data.user))
     })

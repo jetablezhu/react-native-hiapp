@@ -2,12 +2,18 @@
   "global": {
     "home": "首页",
     "message": "消息",
-    "settings": "设置"
+    "settings": "设置",
+    "contacts": "联系人"
   },
   "settings": {
     "location": "城市",
     "language": "语言选择",
     "feedback": "意见反馈",
-    "about": "关于我们"
+    "about": "关于我们",
+    "avatar": "头像",
+    "gender": "性别",
+    "nickname": "昵称",
+    "male": "男",
+    "female": "女"
   }
 }

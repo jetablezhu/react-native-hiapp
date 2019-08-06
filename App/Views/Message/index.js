@@ -5,6 +5,7 @@
  */
 
 import React from 'react'
+import connect from 'redux-connect-decorator'
 import config from '@Config'
 import t from '@Localize'
 
@@ -23,9 +24,16 @@ import {
   SafeAreaView
 } from 'react-native'
 
+@connect(state => ({
+  user: state.app.user
+}))
 export default class MessageScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state
+  static navigationOptions = ({
+    navigation
+  }) => {
+    const {
+      params = {}
+    } = navigation.state
     return {
       ...config.defaultNavigation,
       title: params.user.nickname
@@ -100,13 +108,13 @@ export default class MessageScreen extends React.Component {
 
   answerDemo(messages) {
     if (messages.length > 0) {
-      if (messages[0].image || messages[0].location || !this._isAlright) {
+      // if (messages[0].image || messages[0].location || !this._isAlright) {
         this.setState(previousState => {
           return {
             typingText: 'React Native is typing'
           }
         })
-      }
+      // }
     }
 
     setTimeout(() => {
@@ -117,20 +125,15 @@ export default class MessageScreen extends React.Component {
           } else if (messages[0].location) {
             this.onReceive('My favorite place')
           } else {
-            if (!this._isAlright) {
+            // if (!this._isAlright) {
               this._isAlright = true
               this.onReceive('Alright')
-            }
+            // }
           }
         }
       }
-
-      this.setState(previousState => {
-        return {
-          typingText: null
-        }
-      })
-    }, 1000)
+      
+    }, 3000)
   }
 
   onReceive(text) {
@@ -145,7 +148,8 @@ export default class MessageScreen extends React.Component {
             name: 'React Native'
             // avatar: 'https://facebook.github.io/react/img/logo_og.png',
           }
-        })
+        }),
+        typingText:null
       }
     })
   }
@@ -156,7 +160,7 @@ export default class MessageScreen extends React.Component {
         {...props}
         wrapperStyle={{
           left: {
-            backgroundColor: '#f0f0f0'
+            backgroundColor: '#85ff00'
           }
         }}
       />
@@ -197,9 +201,8 @@ export default class MessageScreen extends React.Component {
           loadEarlier={this.state.loadEarlier}
           onLoadEarlier={this.onLoadEarlier}
           isLoadingEarlier={this.state.isLoadingEarlier}
-          user={{
-            _id: 1 // sent messages should have same user._id
-          }}
+          user={{_id:1}}
+          showUserAvatar={true}
           renderBubble={this.renderBubble}
           renderSystemMessage={this.renderSystemMessage}
           renderFooter={this.renderFooter}
