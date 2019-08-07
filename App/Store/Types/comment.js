@@ -1,0 +1,2 @@
+export const INIT_COMMENT = 'INIT_COMMENT'
+export const APPEND_COMMENT = 'APPEND_COMMENT'

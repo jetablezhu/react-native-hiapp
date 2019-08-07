@@ -1,7 +1,6 @@
 import req from '@Network'
 import types from '../Types'
 import { createAction } from 'redux-actions'
-import data from '../../data/contacts'
 
 export const initContacts = createAction(types.INIT_CONTACTS)
 

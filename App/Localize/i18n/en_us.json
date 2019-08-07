@@ -12,7 +12,10 @@
   },
   "home": {
     "publisher": "Publisher",
-    "publisherPlaceholder": "What's new with you."
+    "publisherPlaceholder": "What's new with you.",
+    "comment":"comment",
+    "like":"like",
+    "detail":"Content"
   },
   "settings": {
     "location": "Location",

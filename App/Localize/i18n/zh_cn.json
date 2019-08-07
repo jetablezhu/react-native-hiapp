@@ -3,7 +3,19 @@
     "home": "首页",
     "message": "消息",
     "settings": "设置",
-    "contacts": "联系人"
+    "contacts": "联系人",
+    "about": "关于我们",
+    "profile": "我",
+    "send": "发送",
+    "ok": "成功",
+    "close": "关闭"
+  },
+  "home":{
+    "publisher": "朋友圈",
+    "publisherPlaceholder": "你有啥想说的",
+    "comment":"评论",
+    "like":"喜欢",
+    "detail":"正文"
   },
   "settings": {
     "location": "城市",
@@ -14,6 +26,9 @@
     "gender": "性别",
     "nickname": "昵称",
     "male": "男",
-    "female": "女"
+    "female": "女",
+    "needRestartTip": "语言设置会在下次重启后生效",
+    "feedbackPlaceholder": "有啥想告诉我们的么？",
+    "feedbackSuccess": "感谢您的反馈"
   }
 }

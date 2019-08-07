@@ -5,7 +5,7 @@ import styles from '@Styles'
 import t from '@Localize'
 import Editor from '@Components/Editor'
 import HeaderButton from '@Components/HeaderButton'
-import { setModalVisibleStatus } from '@Store/Actions'
+import { setModalVisibleStatus,addTimeLine } from '@Store/Actions'
 
 import {
   View,
@@ -18,9 +18,11 @@ import {
 } from 'react-native-elements'
 
 @connect(state => ({
-  //
+  user:state.app.user,
+  timeline:state.home.timeline
 }), {
-  setModalVisibleStatus
+  setModalVisibleStatus,
+  addTimeLine
 })
 
 export default class PublisherScreen extends React.Component {
@@ -59,6 +61,15 @@ export default class PublisherScreen extends React.Component {
   }
 
   sendPost() {
+    this.props.addTimeLine([{
+      "id": Math.round(Math.random() * 1000000).toString(),
+      "nickname": this.props.user.nick_name,
+      "avatar": "3",
+      "text": this.state.text,
+      "like_count": 0,
+      "comment_count": 0,
+      "created_at": new Date().getTime().toString()
+    }])
     this.closeModal()
   }
 
