@@ -11,8 +11,9 @@
 [HiApp](https://github.com/BelinChung/HiApp) written in react-native.
 
 ## Previews
+<img src="https://github.com/jetablezhu/mockfile/blob/master/hiapp_demo.png?raw=true" width=400/>
 
-![preview](https://github.com/jetablezhu/mockfile/blob/master/hiapp_demo.gif)
+![preview](https://github.com/jetablezhu/mockfile/blob/master/hiapp_demo.gif?raw=true)
 
 ## Requirements
 
