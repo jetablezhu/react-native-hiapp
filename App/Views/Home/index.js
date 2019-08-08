@@ -89,7 +89,7 @@ export default class HomeScreen extends React.Component {
               </Text>
               {
                 item.original_pic?
-                  <Image style={viewStyles.pic} source={{uri:item.original_pic}} />:null
+                  <Image style={viewStyles.pic} resizeMode={"cover"} source={{uri:item.original_pic}} />:null
               }
             </View>
           </View>
@@ -164,7 +164,8 @@ const viewStyles = StyleSheet.create({
     lineHeight:25
   },
   pic:{
-    width:200
+    width:300,
+    height:100
   },
   listBottom:{
     flexDirection:"row",
