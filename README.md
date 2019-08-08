@@ -12,7 +12,7 @@
 
 ## Previews
 
-[![preview](https://github.com/jetablezhu/mockfile/blob/master/hiapp_demo.png)](https://github.com/jetablezhu/mockfile/blob/master/hiapp_demo.mp4) 
+[![preview](https://github.com/jetablezhu/mockfile/blob/master/hiapp_demo.gif)]
 
 ## Requirements
 
