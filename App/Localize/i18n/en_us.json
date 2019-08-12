@@ -15,7 +15,9 @@
     "publisherPlaceholder": "What's new with you.",
     "comment":"comment",
     "like":"like",
-    "detail":"Content"
+    "detail":"Content",
+    "nocomment":"no comment yet",
+    "noname":"I dont know"
   },
   "settings": {
     "location": "Location",

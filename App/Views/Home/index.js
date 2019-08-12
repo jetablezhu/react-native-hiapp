@@ -5,7 +5,7 @@ import config from '@Config'
 import styles from '@Styles'
 import t from '@Localize'
 import HeaderButton from '@Components/HeaderButton'
-import { fetchUserInfo, setModalVisibleStatus,fetchTimeLine } from '@Store/Actions'
+import { fetchUserInfo, setModalVisibleStatus,fetchTimeLine,addLike,setCurrentTimeline } from '@Store/Actions'
 import { getRemoteAvatar } from '@Utils'
 import Icon from '@Components/Icon'
 
@@ -27,7 +27,9 @@ import {
 }), {
   setModalVisibleStatus,
   fetchUserInfo,
-  fetchTimeLine
+  fetchTimeLine,
+  addLike,
+  setCurrentTimeline
 })
 export default class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -68,12 +70,21 @@ export default class HomeScreen extends React.Component {
     })
   }
 
-  keyExtractor = (item, index) => item.id
+  keyExtractor = (item, index) => item.id.toString()
+
+  addLike(topicId){
+    this.props.addLike(topicId)
+  }
+
+  toDetail(timeline){
+    this.props.setCurrentTimeline(timeline)
+    this.props.navigation.navigate('Detail')
+  }
 
   renderItem = ({ item }) => {
     return (
       <View style={viewStyles.listContainer}>
-        <TouchableHighlight onPress={_ => { this.props.navigation.navigate('Detail', { item: item }) }}>
+        <TouchableHighlight onPress={_ =>this.toDetail(item)}>
           <View>
             <ListItem
               containerStyle={viewStyles.listItem}
@@ -81,30 +92,30 @@ export default class HomeScreen extends React.Component {
               titleStyle={viewStyles.titleStyle}
               leftAvatar={{ source: { uri: getRemoteAvatar(item.avatar) }}}
               title={item.nickname}
-              subtitle={moment(Number(item.created_at)).fromNow()}
+              subtitle={moment(Number(item.createdAt)).fromNow()}
             />
             <View style={viewStyles.content}>
               <Text style={viewStyles.contentText}>
                 {item.text}
               </Text>
               {
-                item.original_pic?
-                  <Image style={viewStyles.pic} resizeMode={"cover"} source={{uri:item.original_pic}} />:null
+                item.originalPic?
+                  <Image style={viewStyles.pic} resizeMode={"cover"} source={{uri:item.originalPic}} />:null
               }
             </View>
           </View>
         </TouchableHighlight>
         <View style={viewStyles.listBottom}>
-          <TouchableHighlight style={{flex:1}} underlayColor='transparent' onPress={this.openPublisher.bind(this)}>
+          <TouchableHighlight style={{flex:1}} underlayColor='transparent' onPress={_ =>this.toDetail(item)}>
             <View style={viewStyles.listBottomLeft}>
               <Icon style={viewStyles.icon} name={"comment"}/>
-              <Text style={viewStyles.num}>{item.comment_count?item.comment_count:t("home.comment")}</Text>
+              <Text style={viewStyles.num}>{item.commentCount?item.commentCount:t("home.comment")}</Text>
             </View>
           </TouchableHighlight>
-          <TouchableHighlight style={{flex:1}} underlayColor='transparent' onPress={()=>{}}>
+          <TouchableHighlight style={{flex:1}} underlayColor='transparent' onPress={_ =>this.addLike(item.id)}>
             <View style={viewStyles.listBottomRight}>
               <Icon style={viewStyles.icon} name={"like"}/>
-              <Text style={viewStyles.num}>{item.like_count?item.like_count:t("home.like")}</Text>
+              <Text style={viewStyles.num}>{item.likeCount?item.likeCount:t("home.like")}</Text>
             </View>
           </TouchableHighlight>
         </View>
@@ -129,7 +140,8 @@ export default class HomeScreen extends React.Component {
   openPublisher() {
     this.props.setModalVisibleStatus({
       name: 'publisher',
-      status: true
+      status: true,
+      type:1
     })
   }
 }

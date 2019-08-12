@@ -53,7 +53,7 @@ export default class HomeScreen extends React.Component {
           containerStyle={viewStyles.listItem}
           subtitleStyle={viewStyles.subtitleStyle}
           leftAvatar={{ source: { uri: getRemoteAvatar(item.avatar) } }}
-          title={item.nickname}
+          title={item.nick_name}
           subtitle={item.location}
           onPress={_ => { this.props.navigation.navigate('Message', { user: item }) }}
         />

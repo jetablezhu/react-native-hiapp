@@ -1,11 +1,13 @@
 import React from 'react'
 import connect from 'redux-connect-decorator'
+import Icon from 'react-native-vector-icons/Ionicons'
+import moment from 'moment'
 import config from '@Config'
 import styles from '@Styles'
 import t from '@Localize'
-import { fetchComment,setModalVisibleStatus } from '@Store/Actions'
+import { fetchComment,setModalVisibleStatus,addLike } from '@Store/Actions'
 import { getRemoteAvatar } from '@Utils'
-import Icon from '@Components/Icon'
+import {Icon as MyIcon} from '@Components/Icon'
 
 import {
   View,
@@ -22,10 +24,13 @@ import {
 } from 'react-native-elements'
 
 @connect(state=>({
-	comment:state.comment.comment
+	timeline:state.home.timeline,
+	comment:state.comment.comment,
+	current:state.home.current
 }),{
 	fetchComment,
-	setModalVisibleStatus
+	setModalVisibleStatus,
+	addLike
 })
 export default class DetailScreen extends React.Component{
 	static navigationOptions = ({navigation})=>{
@@ -37,10 +42,8 @@ export default class DetailScreen extends React.Component{
 
 	constructor(props) {
 	  super(props);
-	  this.itemInfo=this.props.navigation.state.params.item
 	  this.state = {
-			refreshing:true,
-			like_count:this.itemInfo.like_count
+			refreshing:true
 	  };
 	}
 
@@ -48,15 +51,19 @@ export default class DetailScreen extends React.Component{
 		this.setState({
       refreshing: true
     })
-		this.props.fetchComment().then(()=>{
+		this.props.fetchComment(this.props.current.id).then(()=>{
 			this.setState({
 				refreshing:false
 			})
 		})
 	}
 
-	keyExtractor=(item,index)=>index.toString()
+	keyExtractor=(item,index)=>item.id.toString()
 	
+	addLike(){
+		this.props.addLike(this.props.current.id)
+	}
+
 	renderItem=({item})=>{
 		return (
 			<View style={viewStyles.commentListContainer}>
@@ -66,8 +73,8 @@ export default class DetailScreen extends React.Component{
 		      subtitleStyle={viewStyles.subtitleStyle}
 		      titleStyle={viewStyles.titleStyle}
 		      leftAvatar={{ source: { uri: getRemoteAvatar(item.avatar) }}}
-		      title={item.name}
-		      subtitle={item.time}
+		      title={item.name?item.name:t('home.noname')}
+		      subtitle={moment(Number(item.time)).fromNow()}
 		      onPress={_ => { /*this.props.navigation.navigate('Message', { user: item }) */}}
 	      />
 	      <View style={viewStyles.commentContent}>
@@ -80,7 +87,8 @@ export default class DetailScreen extends React.Component{
 	writeComment(){
 		this.props.setModalVisibleStatus({
 			name: 'publisher',
-      status: true
+      status: true,
+      type:2
 		})
 	}
 
@@ -93,18 +101,18 @@ export default class DetailScreen extends React.Component{
 	            containerStyle={viewStyles.listItem}
 	            subtitleStyle={viewStyles.subtitleStyle}
 	            titleStyle={viewStyles.titleStyle}
-	            leftAvatar={{ source: { uri: getRemoteAvatar(this.itemInfo.avatar) }}}
-	            title={this.itemInfo.nickname}
-	            subtitle={this.itemInfo.created_at}
+	            leftAvatar={{ source: { uri: getRemoteAvatar(this.props.current.avatar) }}}
+	            title={this.props.current.nickname}
+	            subtitle={moment(Number(this.props.current.createdAt)).fromNow()}
 	            onPress={_ => { /*this.props.navigation.navigate('Message', { user: item }) */}}
 	          />
 	          <View style={viewStyles.content}>
 	            <Text style={viewStyles.contentText}>
-	              {this.itemInfo.text}
+	              {this.props.current.text}
 	            </Text>
 	            {
-	              this.itemInfo.original_pic?
-	                <Image style={viewStyles.pic} source={{uri:this.itemInfo.original_pic}} />:null
+	              this.props.current.original_pic?
+	                <Image style={viewStyles.pic} source={{uri:this.props.current.original_pic}} />:null
 	            }
 	          </View>
 	        </View>
@@ -113,26 +121,34 @@ export default class DetailScreen extends React.Component{
 	      	<View style={viewStyles.commentBegin}>
 		      	<Text>{t("home.comment")}</Text>
 		      </View>
-		      <FlatList
+	      {
+	      	this.props.comment && this.props.comment.length?
+	      		<FlatList
 		        // contentContainerStyle={}
 		        keyExtractor={this.keyExtractor}
 		        data={this.props.comment}
 		        renderItem={this.renderItem}
 		        onRefresh={ () => this.setState({refreshing:false}) }
 		        refreshing={this.state.refreshing}
-		      />
+		      	/>
+		      	:
+			      <View style={viewStyles.emptyComment}>
+			      	<Icon name="md-sad" size={30}/>
+			      	<Text>{t("home.nocomment")}</Text>
+			      </View>
+	      } 
 		    </View>
 	      <View style={viewStyles.listBottom}>
 	      	<TouchableHighlight style={{flex:1}} underlayColor='transparent' onPress={this.writeComment.bind(this)}>
 	          <View style={viewStyles.listBottomLeft}>
-	            <Icon style={viewStyles.icon} name={"comment"}/>
-	            <Text style={viewStyles.num}>{this.props.comment.length?this.props.comment.length:t("home.comment")}</Text>
+	            <MyIcon style={viewStyles.icon} name={"comment"}/>
+	            <Text style={viewStyles.num}>{this.props.current.commentCount?this.props.current.commentCount:t("home.comment")}</Text>
 	          </View>
 	        </TouchableHighlight>
-	        <TouchableHighlight style={{flex:1}} underlayColor='transparent' onPress={()=>{this.setState({like_state:this.state.like_count++})}}>
+	        <TouchableHighlight style={{flex:1}} underlayColor='transparent' onPress={this.addLike.bind(this)}>
 	          <View style={viewStyles.listBottomRight}>
-	            <Icon style={viewStyles.icon} name={"like"}/>
-	            <Text style={viewStyles.num}>{this.state.like_count?this.state.like_count:t("home.like")}</Text>
+	            <MyIcon style={viewStyles.icon} name={"like"}/>
+	            <Text style={viewStyles.num}>{this.props.current.likeCount?this.props.current.likeCount:t("home.like")}</Text>
 	          </View>
 	        </TouchableHighlight>
 	      </View>
@@ -182,6 +198,12 @@ const viewStyles = StyleSheet.create({
   comment:{
   	flex:1,
   	backgroundColor:"#fff"
+  },
+  emptyComment:{
+		fontSize:14,
+		alignItems:'center',
+		justifyContent:'center',
+		minHeight:100
   },
   commentListContainer:{
     backgroundColor:"#fff"

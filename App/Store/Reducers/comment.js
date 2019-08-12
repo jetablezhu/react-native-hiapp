@@ -11,7 +11,7 @@ export default handleActions({
 	[types.APPEND_COMMENT] (state, action){
 	    return {
 	      ...state,
-	      comment:[...state.comment, ...action.payload]
+	      comment:[ ...action.payload,...state.comment]
 	    }
 	}
 },{

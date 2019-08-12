@@ -27,7 +27,8 @@ class Req {
     const params = {
       url,
       method,
-      credentials: 'same-origin'
+      credentials: 'same-origin',
+      headers:{'content-type':'application/json;charset=utf-8'}
     }
     if (data) {
       params.body = JSON.stringify(data)
@@ -36,8 +37,12 @@ class Req {
       params.headers = headers
     }
     return fetch(url, params)
-      .then(resp => resp.ok ? resp.json().then(this._httpDone) : this._httpFail(resp))
-      .catch(err => Promise.reject(err))
+      .then(resp => {
+        return resp.ok ? resp.json().then(this._httpDone) : this._httpFail(resp)
+      })
+      .catch(err => {
+        return Promise.reject(err)
+      })
   }
   get(url, params = {}) {
     params.url = params.url || url

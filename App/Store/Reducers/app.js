@@ -9,9 +9,10 @@ export default handleActions({
     }
   },
   [types.SET_MODAL_VISIBLE_STATUS] (state, action) {
-    const { name, status } = action.payload
+    const { name, status, type } = action.payload
     const { modalVisible } = state
     modalVisible[name] = status
+    modalVisible.type=type
     return {
       ...state,
       modalVisible: {
@@ -22,6 +23,7 @@ export default handleActions({
 }, {
   user: {},
   modalVisible: {
-    publisher: false
+    publisher: false,
+    type:1, // 1：timeline  2：comment
   }
 })

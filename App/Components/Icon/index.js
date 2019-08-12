@@ -19,3 +19,4 @@ Icon.defaultProps = {
 Icon.propTypes = {
   name: PropTypes.string.isRequired
 }
+export {Icon}

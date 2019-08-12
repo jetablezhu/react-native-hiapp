@@ -36,7 +36,7 @@ export default class MessageScreen extends React.Component {
     } = navigation.state
     return {
       ...config.defaultNavigation,
-      title: params.user.nickname
+      title: params.user.nick_name
     }
   }
 

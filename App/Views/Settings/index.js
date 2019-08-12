@@ -7,12 +7,13 @@ import Icon from '@Components/Icon'
 import { View, StyleSheet } from 'react-native'
 import { ListItem } from 'react-native-elements'
 import req from '@Network'
+import { getRemoteAvatar } from '@Utils'
 
 @connect(state => ({
   user: state.app.user
 }))
 
-export default class HomeScreen extends React.Component {
+export default class SettingScreen extends React.Component {
   static navigationOptions = _ => {
     return {
       ...config.defaultNavigation,
@@ -60,7 +61,7 @@ export default class HomeScreen extends React.Component {
           leftAvatar={{
             size: 65,
             source: {
-              uri: this.props.user.avatar_url
+              uri: getRemoteAvatar(this.props.user.avatar)
             }
           }}
           title={this.props.user.nick_name}

@@ -5,6 +5,8 @@ import styles from '@Styles'
 import { View, StyleSheet } from 'react-native'
 import { ListItem } from 'react-native-elements'
 import t from '@Localize'
+import { getRemoteAvatar } from '@Utils'
+
 
 @connect(state => ({
   user: state.app.user
@@ -29,7 +31,7 @@ export default class ProfileScreen extends React.Component {
             rightAvatar={{
               size: 65,
               source: {
-                uri: this.props.user.avatar_url
+                uri: getRemoteAvatar(this.props.user.avatar)
               }
             }}
           />
@@ -50,7 +52,7 @@ export default class ProfileScreen extends React.Component {
             bottomDivider
             title={t('settings.location')}
             rightTitle={this.props.user.location}
-            rightTitleStyle={{ width: 140 }}
+            // rightTitleStyle={{ width: 140}}
           />
         </View>
       </View>

@@ -5,7 +5,7 @@ export default handleActions({
   [types.INIT_TIMELINE] (state, action) {
     return {
       ...state,
-      timeline: action.payload
+      timeline: action.payload,
     }
   },
   [types.PREPEND_TIMELINE] (state, action) {
@@ -19,7 +19,33 @@ export default handleActions({
       ...state,
       timeline: [...state.timeline, ...action.payload]
     }
+  },
+  [types.TIMELINE_ADD_LIKE] (state, action){
+    state.timeline.forEach(item=>{
+      if(item.id===action.payload){
+        item.likeCount++  
+      }
+    })
+    return {
+      ...state,
+      timeline: [...state.timeline]
+    }  
+  },
+  [types.TIMELINE_SET_CURRENT] (state,action){
+    return {
+      ...state,
+      current:action.payload
+    }
+  },
+  [types.TIMELINE_ADD_COMMENT] (state, action){
+    state.current.commentCount++
+    return {
+      ...state,
+      timeline:[...state.timeline],
+      current:state.current
+    }  
   }
 }, {
-  timeline: []
+  timeline: [],
+  current:{}
 })

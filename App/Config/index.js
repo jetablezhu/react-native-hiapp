@@ -5,7 +5,7 @@ const Skin = {
 
 const App = {
   devBaseUrl: 'https://raw.githubusercontent.com/BelinChung/api-mock/master/HiApp',
-  prodBaseUrl: 'http://localhost:8081/app/data/',
+  prodBaseUrl: 'http://jetable.tpddns.cn:8080/hiapp',
   defaultNavigation: {
     headerStyle: {
       backgroundColor: Skin.mainColor,

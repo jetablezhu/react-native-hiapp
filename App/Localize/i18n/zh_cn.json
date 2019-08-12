@@ -15,7 +15,9 @@
     "publisherPlaceholder": "你有啥想说的",
     "comment":"评论",
     "like":"喜欢",
-    "detail":"正文"
+    "detail":"正文",
+    "nocomment":"还没人评论呢",
+    "noname":"神秘客"
   },
   "settings": {
     "location": "城市",

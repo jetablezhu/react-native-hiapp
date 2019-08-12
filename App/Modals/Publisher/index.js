@@ -5,7 +5,7 @@ import styles from '@Styles'
 import t from '@Localize'
 import Editor from '@Components/Editor'
 import HeaderButton from '@Components/HeaderButton'
-import { setModalVisibleStatus,addTimeLine } from '@Store/Actions'
+import { setModalVisibleStatus,addTimeLine,addComment } from '@Store/Actions'
 
 import {
   View,
@@ -18,11 +18,13 @@ import {
 } from 'react-native-elements'
 
 @connect(state => ({
+  modal: state.app.modalVisible,
   user:state.app.user,
-  timeline:state.home.timeline
+  current:state.home.current
 }), {
   setModalVisibleStatus,
-  addTimeLine
+  addTimeLine,
+  addComment
 })
 
 export default class PublisherScreen extends React.Component {
@@ -38,7 +40,7 @@ export default class PublisherScreen extends React.Component {
       <View style={viewStyles.container}>
         <Header
           leftComponent={<HeaderButton text={t('global.close')} onPressButton={ this.closeModal.bind(this) }/>}
-          centerComponent={{ text: t('home.publisher'), style: styles.modalHeader.center }}
+          centerComponent={{ text: this.props.modal.type===1?t('home.publisher'):t('home.comment'), style: styles.modalHeader.center }}
           rightComponent={<HeaderButton text={t('global.send')} onPressButton={ this.sendPost.bind(this) }/>}
           containerStyle={{
             backgroundColor: config.mainColor,
@@ -61,15 +63,27 @@ export default class PublisherScreen extends React.Component {
   }
 
   sendPost() {
-    this.props.addTimeLine([{
-      "id": Math.round(Math.random() * 1000000).toString(),
-      "nickname": this.props.user.nick_name,
-      "avatar": "3",
-      "text": this.state.text,
-      "like_count": 0,
-      "comment_count": 0,
-      "created_at": new Date().getTime().toString()
-    }])
+    if(this.props.modal.type===1)
+    {
+      this.props.addTimeLine({
+        "nickname": this.props.user.nick_name,
+        "avatar": this.props.user.avatar,
+        "text": this.state.text,
+        "likeCount": 0,
+        "commentCount": 0,
+        "createdAt": new Date().getTime().toString()
+      })
+    }
+    else{
+        this.props.addComment({
+          "avatar":this.props.user.avatar,
+          "text":this.state.text,
+          "time":new Date().getTime().toString(),
+          "userId":this.props.user.id,
+          "timelineId":this.props.current.id,
+          "name":this.props.user.nick_name
+        })
+    }
     this.closeModal()
   }
 
