@@ -67,6 +67,7 @@ const TabNavigator = createBottomTabNavigator(
     tabBarOptions: {
       activeTintColor: config.mainColor,
       inactiveTintColor: 'gray',
+      tabStyle:{alignItems:'center'},
     }
   }
 )

@@ -5,10 +5,14 @@ const Skin = {
 
 const App = {
   devBaseUrl: 'https://raw.githubusercontent.com/BelinChung/api-mock/master/HiApp',
-  prodBaseUrl: 'http://jetable.tpddns.cn:8080/hiapp',
+  prodBaseUrl: 'https://www.shaleba.top/hiapp',
   defaultNavigation: {
     headerStyle: {
-      backgroundColor: Skin.mainColor,
+      backgroundColor: Skin.mainColor
+    },
+    headerTitleStyle: { 
+      textAlign:"center", 
+      flex:1
     },
     headerTintColor: '#fff'
   }
