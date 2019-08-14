@@ -36,7 +36,8 @@ export default class DetailScreen extends React.Component{
 	static navigationOptions = ({navigation})=>{
 		return {
 			...config.defaultNavigation,
-			title: t('home.detail')
+			title: t('home.detail'),
+	    headerRight:(<View style={{padding:0}}></View>)
 		}
 	}
 

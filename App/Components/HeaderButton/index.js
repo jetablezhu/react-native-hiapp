@@ -18,7 +18,7 @@ export default class HeaderButton extends React.Component {
         </TouchableHighlight>
       )
     } else {
-      return <Button title={text} color="#fff" onPress={() => onPressButton() }/>
+      return <Button title={text} style={{color:"#fff"}} color="#ff9800" onPress={() => onPressButton() }/>
     }
   }
 }

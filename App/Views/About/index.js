@@ -11,6 +11,7 @@ export default class AboutScreen extends React.Component {
     return {
       ...config.defaultNavigation,
       title: t('global.about'),
+      headerRight:(<View style={{padding:0}}></View>)
     }
   }
 

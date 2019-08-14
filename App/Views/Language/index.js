@@ -21,6 +21,7 @@ export default class LanguageScreen extends React.Component {
     return {
       ...config.defaultNavigation,
       title: t('settings.language'),
+      headerRight:(<View style={{padding:0}}></View>)
     }
   }
 

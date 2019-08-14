@@ -37,6 +37,7 @@ export default class HomeScreen extends React.Component {
     const onPressRightButtonFunc = params.openPublisher || function() {}
     return {
       ...config.defaultNavigation,
+      headerLeft:(<View></View>),
       title: t('global.home'),
       headerRight: (
         <HeaderButton

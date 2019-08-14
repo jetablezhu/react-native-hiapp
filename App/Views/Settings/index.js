@@ -55,7 +55,7 @@ export default class SettingScreen extends React.Component {
     return (
       <View style={viewStyles.container}>
         <ListItem
-          chevron
+          chevron={<Icon name={"ios7arrowright"} size={20} color={"#a5a5a5"}/>}
           topDivider
           bottomDivider
           leftAvatar={{
@@ -75,7 +75,7 @@ export default class SettingScreen extends React.Component {
             <View style={viewStyles.list} key={i}>
               <ListItem
                 containerStyle={viewStyles.listItem}
-                chevron
+                chevron={<Icon name={"ios7arrowright"} size={20} color={"#a5a5a5"}/>}
                 topDivider
                 bottomDivider
                 title={item.title}

@@ -17,6 +17,7 @@ export default class ProfileScreen extends React.Component {
     return {
       ...config.defaultNavigation,
       title: t('global.profile'),
+      headerRight:(<View style={{padding:0}}></View>)
     }
   }
 
